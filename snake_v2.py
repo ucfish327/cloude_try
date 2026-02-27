@@ -69,7 +69,7 @@ def main(stdscr):
     player = [[mid_r, sw // 4 + i] for i in range(3, 0, -1)]   # head left, tail right
     player_dir = curses.KEY_RIGHT
 
-    enemy = [[mid_r, 3 * sw // 4 - i] for i in range(3, 0, -1)]  # head right, tail left
+    enemy = [[mid_r, 3 * sw // 4 - i] for i in range(8, 0, -1)]  # head right, tail left (length 8)
     enemy_dir = curses.KEY_LEFT
 
     food = place_food(player, enemy, sh, sw)
@@ -167,6 +167,8 @@ def main(stdscr):
         if new_player == food:
             score += 10
             food = place_food(player, enemy, sh, sw)
+            # Enemy grows by 1 each time player eats food
+            enemy.append(enemy[-1][:])
         else:
             player.pop()
 
